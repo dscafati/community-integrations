@@ -15,3 +15,9 @@ test('normalizeMetadataTest', () => {
 
   expect(normalizeMetadata(input)).toEqual(output);
 });
+
+test('normalizeMetadataNullValueTest', () => {
+  // typeof null is 'object'; null and undefined must be normalized, not crash the process.
+  expect(normalizeMetadata({key: null})).toEqual({key: {type: '__infer__', raw_value: null}});
+  expect(normalizeMetadata({key: undefined})).toEqual({key: {type: '__infer__', raw_value: undefined}});
+});
